@@ -1,5 +1,8 @@
 streamlit
+htbuilder
+
 pandas
+pickle
 scikit-learn
 surprise
 wordcloud 
