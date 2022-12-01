@@ -70,13 +70,6 @@ class Method1:
 
         return sentence
     
-    # def ShowSongs(self, ret = False):
-    #     songs = self.track_lyrics_df['Title'].unique()
-    #     if ret == False:
-    #         print(songs)
-    #     else:
-    #         return songs
-        
     def getLyricsSimilarity(self, song, k=5):
 
             index = self.track_lyrics_df[self.track_lyrics_df['Title'] == song].index[0]
@@ -121,29 +114,9 @@ class Method1:
         wordcloud = WordCloud(width = 800, height = 800, mask = vinyl_mask, background_color ='white',
                               stopwords = stopwords, min_font_size = 10).generate(comment_words)
  
-        # plot the WordCloud image                      
         plt.figure(figsize = (5, 5), facecolor = None)
         plt.imshow(wordcloud)
         plt.axis("off")
         plt.savefig('/content/wordcloud.png')
         plt.tight_layout(pad = 0)
         plt.show()
-
-# model = Method1()
-# model.ShowSongs()
-# model.RecommendSongs('Dear Lie', 5)
-# model.LyricCloud()
-
-# def getLyrics(embeddings, words, with_count = False):
-#         sentence = ""
-#         embeddings = embeddings.replace("[","")
-#         embeddings = embeddings.replace("]","")
-#         embeddings = embeddings.replace("'","")
-#         embeddings = embeddings.replace(" ","")
-#         embeddings = embeddings.split(",")
-
-#         for emb in embeddings:
-#             ids = emb.split(":")
-#             sentence += words[int(ids[0])] + " "
-
-#         return sentence

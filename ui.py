@@ -6,7 +6,8 @@ import plotly.express as px
 import pickle
 from PIL import Image
 from os.path import exists
-from lyrics_similarity import Method1 as LyricsSimilarityModel
+from lyrics_similarity_api import Method1 as LyricsSimilarityModel
+from user_similarity_api import get_recommendations as UserSimilarityModel
 
 def show_image(path):
     img = Image.open(path)
