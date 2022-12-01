@@ -1,21 +1,25 @@
 # Music-Recommendation
 
-Model Requirements: 
+### Model Requirements: 
 
 ```
-import numpy as np
-import scipy.sparse
-import pandas as pd
-from wordcloud import WordCloud, STOPWORDS
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KDTree
+pip install -r requirements.txt
 ```
 
-DATA:
+To update the model requirement versions (incase the requirements do throw an error), run the following on a new environment:
+
+```
+pip install pip-tools
+pip-compile requirements.in
+pip install -r requirements.txt
+```
+
+### DATA:
 
 * Lyrics = "TrackData.csv", 
 * Words = "Words.txt"
 * Database = "track_metadata.db"
 * Encodings ="Encodings_numpy.pickle.npy"
-
+* User-Song Database = "train-triplets.txt"
+  
 Download the files from Google Drive.

@@ -9,7 +9,7 @@ sql_query = pd.read_sql_query (''' SELECT * FROM songs ''', db_conn)
 tracks = pd.DataFrame(sql_query)
 
 # file locs
-sim_users = 'pickled_files/user_user_similar.pkl'
+sim_users = pickle.load(open('pickled_files/user_user_similar.pkl', 'rb'))
 df_path = 'data/train_triplets.txt'
 idx_to_user = pickle.load(open('pickled_files/idx_to_user.pkl', 'rb'))
 user_to_idx = pickle.load(open('pickled_files/user_to_idx.pkl', 'rb'))
@@ -17,10 +17,7 @@ user_to_idx = pickle.load(open('pickled_files/user_to_idx.pkl', 'rb'))
 
 class UserSimilarityModel():
     def __init__(self, sim_users, df_path):    
-        with open(sim_users, 'rb') as f:
-            self.sim_users = pickle.load(f)
-            f.close()
-
+        self.sim_users = sim_users
         self.df = pd.concat([chunk for chunk in 
         tqdm(pd.read_csv(df_path, sep = '\t', index_col=None, names = ['User','Song', 'Count'],  chunksize=1000), 
         desc='Loading User-Song Database')])
@@ -28,8 +25,15 @@ class UserSimilarityModel():
     def get_similar_users(self, user):
         return self.sim_users[user]
 
-    def get_most_played(self, user_idx):
-        return self.df[self.df['User']==idx_to_user[user_idx]]['Song'].value_counts().index[:5].tolist()
+    def get_most_played(self, user_idx, names = False):
+        maxplay = self.df[self.df.index==user_idx]['Song'].value_counts().index[:5].tolist()
+        if names:
+            temp = []
+            for song in maxplay:
+                temp.append(self.get_song_from_trackID(song))
+            return temp
+        else:
+            return maxplay
 
     def get_recommendations(self, user_idx):
         similar_users = self.get_similar_users(user_idx)

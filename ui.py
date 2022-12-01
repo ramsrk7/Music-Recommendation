@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import plotly.express as px
 import pickle
 from PIL import Image
 from os.path import exists
 from lyrics_similarity_api import Method1 as LyricsSimilarityModel
-from user_similarity_api import get_recommendations as UserSimilarityModel
+from user_similarity_api import UserSimilarityModel
 
 def show_image(path):
     img = Image.open(path)
@@ -27,7 +25,7 @@ title = "Song Recommendation Engine"
 st.title(title)
 st.write("Created by Amanbeer, Ram, and Shubhangi")
 
-tab1, tab2, tab3 = st.tabs(["Lyric-Based Similarity", "User-Based Similarity", "Hybrid Approach"])
+tab1, tab2 = st.tabs(["Lyric-Based Similarity", "User-Based Similarity"])
 
 with tab1:
     song = st.selectbox('Select a song to see similar songs', songs)
@@ -36,20 +34,19 @@ with tab1:
     if st.button('Show similar songs'):
         lsm.RecommendSongs(song)
         print(song)
-        lsm.LyricCloud(song)
+        # lsm.LyricCloud(song)
         st.write('The top 5 similar songs to ', song, ' are:')
         st.write(lsm.temp[['Title','Artist name']].values)
         st.markdown('---')
-        st.write('Here\'s a word cloud of the lyrics of the similar songs:')
-        show_image('images/temp_wordcloud.jpg' if not exists('images/wordcloud.png') else 'images/temp_wordcloud.png')
+        # st.write('Here\'s a word cloud of the lyrics of the similar songs:')
+        # show_image('images/temp_wordcloud.jpg' if not exists('images/wordcloud.png') else 'images/temp_wordcloud.png')
 
 with tab2:
     number = st.number_input('Selected the index of the user you want to recommend songs to', min_value=0, max_value=len(users)-1, value=0)
     st.write('You have selected user ', number)
-    st.write('The anonymised name of this user is ', user_to_idx[number], ' but let\'s call them John Doe for now.')
+    st.write('The anonymised name of this user is ', idx_to_user[number], ' but let\'s call them John Doe for now.')
     st.markdown('---')
-    st.write('The top 5 songs that John Doe has listened to are:', user_to_idx[number])
+    st.write('The top 5 songs that John Doe has listened to are:', idx_to_user[number])
     st.markdown('---')
     st.write('Here\'s a word cloud of the lyrics of the songs that John Doe has listened to:')
-    show_image('images/temp_wordcloud.png')
-
+    show_image('images/temp_wordcloud.jpg')

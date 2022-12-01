@@ -1,14 +1,11 @@
 streamlit
 htbuilder
-
 pandas
-pickle
 scikit-learn
 surprise
 wordcloud 
 matplotlib
 scipy
 wordcloud
-sqlite3
 pillow
 tqdm

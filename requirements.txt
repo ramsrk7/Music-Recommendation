@@ -90,6 +90,7 @@ pandas==1.5.2
     #   streamlit
 pillow==9.3.0
     # via
+    #   -r requirements.in
     #   matplotlib
     #   streamlit
     #   wordcloud
@@ -151,6 +152,8 @@ toolz==0.12.0
     # via altair
 tornado==6.2
     # via streamlit
+tqdm==4.64.1
+    # via -r requirements.in
 typing-extensions==4.4.0
     # via
     #   rich

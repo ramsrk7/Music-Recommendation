@@ -70,11 +70,11 @@ class Method1:
 
         return sentence
     
-    def getLyricsSimilarity(self, song, k=5):
+    def getLyricsSimilarity(self, song, k=1):
 
             index = self.track_lyrics_df[self.track_lyrics_df['Title'] == song].index[0]
     
-            dist, ind = self.tree.query(self.enc[index:index+1], k=int(k)+1)
+            _, ind = self.tree.query(self.enc[index:index+1], k=int(k)+1)
             self.similarSongs = ind[0]
 
             self.temp = self.track_lyrics_df[self.track_lyrics_df.index.isin(self.similarSongs)]
@@ -116,7 +116,7 @@ class Method1:
  
         plt.figure(figsize = (5, 5), facecolor = None)
         plt.imshow(wordcloud)
-        plt.axis("off")
+        # plt.axis("off")
         plt.savefig('/content/wordcloud.png')
         plt.tight_layout(pad = 0)
         plt.show()
