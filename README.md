@@ -23,3 +23,10 @@ pip install -r requirements.txt
 * User-Song Database = "train-triplets.txt"
   
 Download the files from Google Drive.
+
+
+The models can be run through the UI, which is developed using Streamlit. Run the streamlit app using the following command.
+
+```
+streamlit run ui.py
+```
